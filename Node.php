@@ -1,5 +1,5 @@
 <?php
-namespace Asgard\Xpath;
+namespace H0gar\Xpath;
 
 /**
  * Xpath handler for a node.
@@ -23,9 +23,25 @@ class Node {
 	}
 	
 	/**
+	 * Returns the parent node.
+	 * 
+	 * @return Node
+	*/
+	public function parent() {
+		$parent = $this->domnode;
+		while(true) {
+			$parent = $parent->parentNode;
+			if(!$parent)
+				return;
+			if($parent->nodeType == XML_ELEMENT_NODE)
+				return new Node($parent);
+		}
+	}
+	
+	/**
 	 * Returns the previous node.
 	 * 
-	 * @return \Asgard\Xpath\Node
+	 * @return Node
 	*/
 	public function prev() {
 		$prev = $this->domnode;
@@ -41,7 +57,7 @@ class Node {
 	/**
 	 * Returns the next node.
 	 * 
-	 * @return \Asgard\Xpath\Node
+	 * @return Node
 	*/
 	public function next() {
 		$next = $this->domnode;
@@ -79,7 +95,7 @@ class Node {
 	 * 
 	 * @return string
 	*/
-	public function getAttribute($attr) {
+	public function attr($attr) {
 		if($this->domnode === null)
 			return null;
 		return $this->domnode->getAttribute($attr);
@@ -154,7 +170,7 @@ class Node {
 	 * @param string path Path to the node.
 	 * @param integer pos Element position.
 	 * 
-	 * @return \Asgard\Xpath\Node
+	 * @return Node
 	*/
 	public function item($path, $pos=0) {
 		if($this->xpath === null)
@@ -167,7 +183,7 @@ class Node {
 	 * 
 	 * @param string path Path to the nodes.
 	 * 
-	 * @return array Array of \Asgard\Xpath\Node objects.
+	 * @return array Array of Node objects.
 	*/
 	public function items($path) {
 		if($this->xpath === null)

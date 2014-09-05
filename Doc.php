@@ -1,5 +1,5 @@
 <?php
-namespace Asgard\Xpath;
+namespace H0gar\Xpath;
 
 /**
  * Xpath handler for the whole document.
@@ -71,7 +71,7 @@ class Doc {
 	 * @param string path Path to the node.
 	 * @param integer pos Element position.
 	 * 
-	 * @return \Asgard\Xpath\Node
+	 * @return Node
 	*/
 	public function item($path, $pos=0) {
 		return new Node($this->xpath->evaluate($path)->item($pos));
@@ -82,7 +82,7 @@ class Doc {
 	 * 
 	 * @param string path Path to the nodes.
 	 * 
-	 * @return array Array of \Asgard\Xpath\Node objects.
+	 * @return array Array of Node objects.
 	*/
 	public function items($path) {
 		$r = array();
