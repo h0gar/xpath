@@ -22,10 +22,12 @@ A lightweight package for xpath manipulations.
 ##Usage
 
 **HTML**
+
 	$html = file_get_contents'/page.html');
 	$doc = new \H0gar\Xpath\Doc($html, 'html');
 
 **XML**
+
 	$xml = file_get_contents'/page.xml');
 	$doc = new \H0gar\Xpath\Doc($xml, 'xml');
 
