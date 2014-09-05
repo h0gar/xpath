@@ -24,12 +24,12 @@ A lightweight package for xpath manipulations.
 
 **HTML**
 
-	$html = file_get_contents'/page.html');
+	$html = file_get_contents('page.html');
 	$doc = new \H0gar\Xpath\Doc($html, 'html');
 
 **XML**
 
-	$xml = file_get_contents'/page.xml');
+	$xml = file_get_contents('page.xml');
 	$doc = new \H0gar\Xpath\Doc($xml, 'xml');
 
 <a name="access-a-node"></a>
