@@ -11,6 +11,7 @@ A lightweight package for xpath manipulations.
 - [Navigation](#navigation)
 - [Get a node inner html](#inner-html)
 - [Get a node inner text](#inner-text)
+- [Get an attribute](#attribute)
 - [\DOMElement and \DOMXpath](#domelement-domxpath)
 
 <a name="installation"></a>
@@ -69,6 +70,11 @@ A lightweight package for xpath manipulations.
 	$text = $doc->text('/html/body/div[1]/div/div[2]/ul/li[0]');
 	#or
 	$text = $doc->text('/html/body/div[1]/div/div[2]/ul/li', 1);
+
+<a name="attribute"></a>
+##Get an attribute
+
+	$href = $item->attr('href');
 
 <a name="domelement-domxpath"></a>
 ##\DOMElement and \DOMXpath
