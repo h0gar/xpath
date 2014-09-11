@@ -240,7 +240,7 @@ class Node {
 		$innerXML= ''; 
 		$children = $node->childNodes; 
 		foreach ($children as $child)
-			$innerHTML .= $child->ownerDocument->saveXML($child);
+			$innerXML .= $child->ownerDocument->saveXML($child);
 		return $innerXML; 
 	}
 }
