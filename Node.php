@@ -44,7 +44,7 @@ class Node {
 	 * @return boolean
 	 */
 	public function exists() {
-		return $this->xpath === null;
+		return $this->xpath !== null;
 	}
 	
 	/**
