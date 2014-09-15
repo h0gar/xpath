@@ -37,6 +37,15 @@ class Node {
 				return new Node($parent);
 		}
 	}
+
+	/**
+	 * Checks if node exists.
+	 * 
+	 * @return boolean
+	 */
+	public function exists() {
+		return $this->xpath === null;
+	}
 	
 	/**
 	 * Returns the previous node.
