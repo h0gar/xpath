@@ -38,6 +38,20 @@ class Node {
 		}
 	}
 
+	public function remove($path=null) {
+		if($this->xpath === null)
+			return null;
+		if(!$path)
+			$this->domnode->parentNode->removeChild($this->domnode);
+		else {
+			$items= $this->items($path);
+			foreach($items as $item)
+				$item->remove();
+		}
+
+		return $this;
+	}
+
 	/**
 	 * Checks if node exists.
 	 * 
@@ -95,6 +109,12 @@ class Node {
 	*/
 	public function getNode() {
 		return $this->domnode;
+	}
+	
+	public function tag() {
+		if($this->domnode === null)
+			return null;
+		return strtolower($this->domnode->tagName);
 	}
 	
 	/**

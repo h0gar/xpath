@@ -20,6 +20,16 @@ class Doc {
 		$this->code = $code;
 		$this->xpath = static::toXpath($code, $type);
 	}
+
+	public function remove($path) {
+		if($this->xpath === null)
+			return null;
+		$items= $this->items($path);
+		foreach($items as $item)
+			$item->remove();
+
+		return $this;
+	}
 	
 	/**
 	 * Returns the xpath object.
