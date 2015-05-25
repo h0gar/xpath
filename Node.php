@@ -235,7 +235,8 @@ class Node {
 		$dom = new \DOMDocument();
 		$dom->formatOutput = true;
 		$node = $dom->importNode($domnode, true);
-		$dom->appendChild($node);
+		if($node instanceof \DOMElement)
+			$dom->appendChild($node);
 		return new \DOMXPath($dom);
 	}
 	
