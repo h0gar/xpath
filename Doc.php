@@ -71,8 +71,15 @@ class Doc {
 	 * 
 	 * @return string The text of the node.
 	*/
-	public function text($path, $pos=0) {
-		return $this->item($path, $pos)->text();
+	public function text($path=null, $pos=0) {
+		if($path === null) {
+			$res = '';
+			foreach($this->items('/*') as $i)
+				$res .= $i->text();
+			return $res;
+		}
+		else
+			return $this->item($path, $pos)->text();
 	}
 	
 	/**

@@ -29,6 +29,8 @@ class Node {
 	*/
 	public function parent() {
 		$parent = $this->domnode;
+		if(!$parent)
+			return new Node(null);
 		while(true) {
 			$parent = $parent->parentNode;
 			if(!$parent)
@@ -68,10 +70,12 @@ class Node {
 	*/
 	public function prev() {
 		$prev = $this->domnode;
+		if(!$prev)
+			return new Node(null);
 		while(true) {
 			$prev = $prev->previousSibling;
 			if(!$prev)
-				return;
+				return new Node(null);
 			if($prev->nodeType == XML_ELEMENT_NODE)
 				return new Node($prev);
 		}
@@ -84,10 +88,12 @@ class Node {
 	*/
 	public function next() {
 		$next = $this->domnode;
+		if(!$next)
+			return new Node(null);
 		while(true) {
 			$next = $next->nextSibling;
 			if(!$next)
-				return;
+				return new Node(null);
 			if($next->nodeType == XML_ELEMENT_NODE)
 				return new Node($next);
 		}
@@ -272,5 +278,19 @@ class Node {
 		foreach ($children as $child)
 			$innerXML .= $child->ownerDocument->saveXML($child);
 		return $innerXML; 
+	}
+
+	public function getOuterHTML() {
+		$doc = new \DOMDocument();
+		$doc->appendChild($doc->importNode($this->domnode, true));
+		$html = $doc->saveHTML();
+		return $html;
+	}
+
+	public function getOuterXML() {
+		$doc = new \DOMDocument();
+		$doc->appendChild($doc->importNode($this->domnode, true));
+		$html = $doc->saveXML();
+		return $html;
 	}
 }
