@@ -15,10 +15,11 @@ class Doc {
 	 * 
 	 * @param String code The html/xml code to be parsed.
 	 * @param String type html|xml
+	 * @param String encoding
 	*/
-	public function __construct($code, $type='html') {
+	public function __construct($code, $type='html', $encoding='UTF-8') {
 		$this->code = $code;
-		$this->xpath = static::toXpath($code, $type);
+		$this->xpath = static::toXpath($code, $type, $encoding);
 	}
 
 	public function remove($path) {
@@ -114,15 +115,22 @@ class Doc {
 	 * 
 	 * @param String code The html/xml code to be parsed.
 	 * @param String type html|xml
+	 * @param String encoding
 	 * 
 	 * @return \DOMXPath
 	*/
-	protected static function toXpath($code, $type='html') {
+	protected static function toXpath($code, $type='html', $encoding='UTF-8') {
 		$doc = new \DOMDocument();
 		if ($type == 'xml')
-			@$doc->loadXML($code);
+			@$doc->loadXML('<?xml encoding="'.$encoding.'">' . $code);
 		else
-			@$doc->loadHTML($code);
+			@$doc->loadHTML('<?xml encoding="'.$encoding.'">' . $code);
+
+		foreach($doc->childNodes as $item) {
+			if($item->nodeType == XML_PI_NODE)
+				$doc->removeChild($item); #remove encoding node
+		}
+
 		return new \DOMXPath($doc);
 	}
 }
