@@ -198,6 +198,22 @@ class Node {
 			return $item->text();
 		}
 	}
+
+	public function ownText() {
+		$texts = [];
+		foreach($this->domnode->childNodes as $n) {
+			if($n instanceof \DOMText) {
+				$text = trim($n->textContent);
+				if($text)
+				$texts[] = $text;
+			}
+		}
+
+		if($texts)
+			return implode(' ', $texts);
+		else
+			return '';
+	}
 	
 	/**
 	 * Returns the first Node object from xpath.
@@ -292,5 +308,14 @@ class Node {
 		$doc->appendChild($doc->importNode($this->domnode, true));
 		$html = $doc->saveXML();
 		return $html;
+	}
+
+	public function children() {
+		$children = [];
+		foreach($this->domnode->childNodes as $child) {
+			if($child instanceof \DOMElement)
+				$children[] = new Node($child);
+		}
+		return $children;
 	}
 }
